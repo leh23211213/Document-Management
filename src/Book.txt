@@ -1,0 +1,5 @@
+Book[id=B01, authors=LeVanA, title=bookA, publisher=LeVanHiep, publishedQuantity=1, numOfPages=20]
+Book[id=B02, authors=LeVanB, title=bookB, publisher=LeVanHiep, publishedQuantity=2, numOfPages=20]
+Book[id=B03, authors=LeVanC, title=bookC, publisher=LeVanHiep, publishedQuantity=3, numOfPages=20]
+Book[id=B04, authors=LeVanD, title=bookD, publisher=LeVanHiep, publishedQuantity=4, numOfPages=20]
+Book[id=B05, authors=LeVanE, title=bookE, publisher=LeVanHiep, publishedQuantity=5, numOfPages=20]

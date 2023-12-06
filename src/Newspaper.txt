@@ -1,0 +1,5 @@
+Newspaper[id=N01, authors=LeVanA, title=newspaperA, publisher=LeVanHiep, publishedQuantity=1, issueDay=9]
+Newspaper[id=N02, authors=LeVanB, title=newspaperB, publisher=LeVanHiep, publishedQuantity=2, issueDay=8]
+Newspaper[id=N03, authors=LeVanC, title=newspaperC, publisher=LeVanHiep, publishedQuantity=3, issueDay=7]
+Newspaper[id=N04, authors=LeVanD, title=newspaperD, publisher=LeVanHiep, publishedQuantity=4, issueDay=6]
+Newspaper[id=N05, authors=LeVanE, title=newspaperE, publisher=LeVanHiep, publishedQuantity=5, issueDay=5]
