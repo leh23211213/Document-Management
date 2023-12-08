@@ -1,5 +1,5 @@
-Megazine[id=M01, authors=LeVanA, title=megazineA, publisher=LeVanHiep, publishedQuantity=1, issueNumber=001, issueMonth=6]
-Megazine[id=M02, authors=LeVanB, title=megazineB, publisher=LeVanHiep, publishedQuantity=2, issueNumber=002, issueMonth=7]
-Megazine[id=M03, authors=LeVanC, title=megazineC, publisher=LeVanHiep, publishedQuantity=3, issueNumber=003, issueMonth=8]
-Megazine[id=M04, authors=LeVanD, title=megazineD, publisher=LeVanHiep, publishedQuantity=4, issueNumber=004, issueMonth=9]
-Megazine[id=M05, authors=LeVanE, title=megazineE, publisher=LeVanHiep, publishedQuantity=5, issueNumber=005, issueMonth=10]
+M01 LeVanA megazineA LeVanHiep 1 001 6
+M02 LeVanB megazineB LeVanHiep 2 002 7
+M03 LeVanC megazineC LeVanHiep 3 003 8
+M04 LeVanD megazineD LeVanHiep 4 004 9
+M05 LeVanE megazineE LeVanHiep 5 005 10

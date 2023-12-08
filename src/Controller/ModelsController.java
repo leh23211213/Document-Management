@@ -5,14 +5,14 @@ import DataAccess.Repository;
 import Models.Model;
 
 public class ModelsController {
-    protected Repository Repository;
+  public Repository Repository;
 
-    public ModelsController(IDataAccess context) {
-        Repository = new Repository(context);
-    }
+  public ModelsController(IDataAccess context) {
+    this.Repository = new Repository(context);
+  }
 
-    public void Render(String id) {
-        Model model = Repository.select(id);
-        System.out.println();
-    }
+  public void render(String id) {
+    Model model = Repository.Select(id);
+    System.out.println(Repository._context.models);
+  }
 }

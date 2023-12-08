@@ -1,31 +1,29 @@
 package DataAccess;
 
-import java.util.ArrayList;
-
 import Models.Model;
+import java.io.IOException;
+import java.util.List;
 
 public class Repository {
-    public ArrayList<Model> models = new ArrayList<>();
-    public IDataAccess _context;
+  public IDataAccess _context;
 
-    public Repository(IDataAccess context) {
-        this._context = context;
-        _context.Load();
-    }
+  public Repository(IDataAccess context) {
+    this._context = context;
+    _context.Load();
+  }
 
-    public void Save() {
-        _context.Save();
-    }
+  public void Load() { _context.Load(); }
 
-  
-    public Model select(String id) {
-        Model temp = null;
-        for (Model model : models) {
-            if (model.getId() == id) {
-                temp = model;
-            } else
-                System.out.println("Can't found!");
-        }
-        return temp;
+  public void Save() throws IOException { _context.Save(); }
+
+  public List<Model> list() { return _context.getModels(); }
+
+  public Model Select(String id) {
+    Model temp = null;
+    for (var each : list()) {
+      if (each.getId().equalsIgnoreCase(id))
+        return temp = each;
     }
+    return null;
+  }
 }
