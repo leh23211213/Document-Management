@@ -1,6 +1,7 @@
 package Models;
 
 public class Book extends Model {
+  public Book() {}
   public Book(String id, String authors, String title, String publisher,
               int publishedQuantity, int numOfPages) {
     super(id, authors, title, publisher, publishedQuantity);

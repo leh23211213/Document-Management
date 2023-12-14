@@ -1,5 +1,0 @@
-M01 LeVanA megazineA LeVanHiep 1 001 6
-M02 LeVanB megazineB LeVanHiep 2 002 7
-M03 LeVanC megazineC LeVanHiep 3 003 8
-M04 LeVanD megazineD LeVanHiep 4 004 9
-M05 LeVanE megazineE LeVanHiep 5 005 10

@@ -1,6 +1,7 @@
 package Models;
 
 public class Model {
+  public Model() {}
   public Model(String id, String authors, String title, String publisher,
                int publishedQuantity) {
     this.id = id;
@@ -10,7 +11,6 @@ public class Model {
     this.publishedQuantity = publishedQuantity;
   }
 
-  public Model() {}
   private String id = null;
 
   public String getId() { return id; }

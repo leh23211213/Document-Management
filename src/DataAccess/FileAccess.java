@@ -1,5 +1,9 @@
 package DataAccess;
 
+import Models.Book;
+import Models.Megazine;
+import Models.Model;
+import Models.Newspaper;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -7,16 +11,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Models.Book;
-import Models.Megazine;
-import Models.Model;
-import Models.Newspaper;
-
 public class FileAccess implements IDataAccess {
-  public ArrayList<Model> models = new ArrayList<>();
+  private ArrayList<Model> models = new ArrayList<>();
+  private final String _file = "data.txt";
+  private String filePath =
+      "E:\\IT\\VSCode\\Github\\Document-Management\\src\\Book.txt";
   public ArrayList<Model> getModels() { return models; }
-  private String _file = "data.txt";
-  private String filePath;
 
   public FileAccess(String filePath) { this.filePath = filePath; }
   public void render() { System.out.println(models.size()); }
@@ -49,6 +49,7 @@ public class FileAccess implements IDataAccess {
           }
         }
         System.out.println("Load Success!");
+        read.close();
       } else {
         System.out.println(" file not found !");
         return;
