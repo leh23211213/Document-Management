@@ -1,5 +1,0 @@
-N01 LeVanA NewspaperA LeVanHiep 1 001 6
-N02 LeVanB NewspaperB LeVanHiep 2 002 7
-N03 LeVanC NewspaperC LeVanHiep 3 003 8
-N04 LeVanD NewspaperD LeVanHiep 4 004 9
-N05 LeVanE NewspaperE LeVanHiep 5 005 10

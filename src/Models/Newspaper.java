@@ -1,6 +1,7 @@
 package Models;
 
 public class Newspaper extends Model {
+  public Newspaper() {}
   public Newspaper(String id, String authors, String title, String publisher,
                    int publishedQuantity, int issueDay) {
     super(id, authors, title, publisher, publishedQuantity);

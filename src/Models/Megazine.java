@@ -1,6 +1,7 @@
 package Models;
 
 public class Megazine extends Model {
+  public Megazine() {}
   public Megazine(String id, String authors, String title, String publisher,
                   int publishedQuantity, int issueNumber, int issueMonth) {
     super(id, authors, title, publisher, publishedQuantity);
