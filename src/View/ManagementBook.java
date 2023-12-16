@@ -1,5 +1,7 @@
 package View;
 
+import static java.util.Spliterators.iterator;
+
 import Controller.ModelsController;
 import DataAccess.FileAccess;
 import DataAccess.IDataAccess;
@@ -8,6 +10,7 @@ import Models.Megazine;
 import Models.Model;
 import Models.Newspaper;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -1080,29 +1083,39 @@ public class ManagementBook extends javax.swing.JFrame {
       java.awt.event
           .ActionEvent evt) { // GEN-FIRST:event_ptn_InsertActionPerformed
     String id = txt_Id.getText().replaceAll(" ", "");
-    String authors = txt_Authors.getText().replaceAll(" ", "");
-    String title = txt_Title.getText().replaceAll(" ", "");
-    String publisher = txt_Publisher.getText().replaceAll(" ", "");
-    int publishedQuantity = Integer.parseInt(txt_PublishedQuantity.getText());
-    if (id.charAt(0) == 'B') {
-      int numberOfPages = Integer.parseInt(txt_NumberOfPages.getText());
-      DA.addRow(new Object[] {id, authors, title, publisher, publishedQuantity,
-                              "", "", "", numberOfPages});
-    } else if (id.charAt(0) == 'M') {
-      int issueNumber = Integer.parseInt(txt_IssueNumber.getText());
-      int issueMonth = Integer.parseInt(txt_IssueMonth.getText());
-
-      DA.addRow(new Object[] {id, authors, title, publisher, publishedQuantity,
-                              issueNumber, "", issueMonth, ""});
-    } else if (id.charAt(0) == 'N') {
-      int issueDay = Integer.parseInt(txt_IssueDay.getText());
-      DA.addRow(new Object[] {id, authors, title, publisher, publishedQuantity,
-                              "", issueDay, "", ""});
-    } else {
-      JOptionPane.showMessageDialog(
-          null, "Phải nhập mã tài liệu đúng quy chuẩn 'B' 'M' 'N'!");
+    int check = 0;
+    for (var m : list) {
+      if (m.getId().equals(id)) {
+        check++;
+      }
     }
+    if (check != 0) {
+      JOptionPane.showMessageDialog(null, "không được thêm trùng mã tài liệu");
+    } else {
+      String authors = txt_Authors.getText().replaceAll(" ", "");
+      String title = txt_Title.getText().replaceAll(" ", "");
+      String publisher = txt_Publisher.getText().replaceAll(" ", "");
+      int publishedQuantity = Integer.parseInt(txt_PublishedQuantity.getText());
+      if (id.charAt(0) == 'B') {
+        int numberOfPages = Integer.parseInt(txt_NumberOfPages.getText());
+        list.add(new Book(id, authors, title, publisher, publishedQuantity,
+                          numberOfPages));
+      } else if (id.charAt(0) == 'M') {
+        int issueNumber = Integer.parseInt(txt_IssueNumber.getText());
+        int issueMonth = Integer.parseInt(txt_IssueMonth.getText());
 
+        list.add(new Megazine(id, authors, title, publisher, publishedQuantity,
+                              issueNumber, issueMonth));
+      } else if (id.charAt(0) == 'N') {
+        int issueDay = Integer.parseInt(txt_IssueDay.getText());
+        list.add(new Newspaper(id, authors, title, publisher, publishedQuantity,
+                               issueDay));
+      } else {
+        JOptionPane.showMessageDialog(
+            null, "Phải nhập mã tài liệu đúng quy chuẩn 'B--' 'M--' 'N--'!");
+      }
+    }
+    napDuLieu(list);
   } // GEN-LAST:event_ptn_InsertActionPerformed
 
   private void txt_InsertActionPerformed(
@@ -1210,37 +1223,21 @@ public class ManagementBook extends javax.swing.JFrame {
       java.awt.event
           .ActionEvent evt) { // GEN-FIRST:event_ptn_DeleteActionPerformed
     // TODO add your handling code here:
-    String key = txt_Search.getText().replaceAll(" ", "");
+    String key = txt_Delete.getText().replaceAll(" ", "");
     Delete(key);
-
-  } // GEN-LAST:event_ptn_DeleteActionPerformed
+  }
+  // GEN-LAST:event_ptn_DeleteActionPerformed
   private void Delete(String key) {
-    while (DA.getRowCount() > 0) {
-      DA.removeRow(0);
-    }
-
     for (var m : list) {
       if (m.getId().equals(key)) {
         list.remove(m);
         break;
-      } else if (m instanceof Book) {
-        DA.addRow(new Object[] {m.getId(), m.getAuthors(), m.getTitle(),
-                                m.getPublisher(), m.getPublishedQuantity(), "",
-                                "", "", ((Book)m).getNumOfPages()});
-        continue;
-      } else if (m instanceof Megazine) {
-        DA.addRow(new Object[] {m.getId(), m.getAuthors(), m.getTitle(),
-                                m.getPublisher(), m.getPublishedQuantity(),
-                                ((Megazine)m).getIssueNumber(), "",
-                                ((Megazine)m).getIssueMonth(), ""});
-        continue;
-      } else if (m instanceof Newspaper) {
-        DA.addRow(new Object[] {m.getId(), m.getAuthors(), m.getTitle(),
-                                m.getPublisher(), m.getPublishedQuantity(), "",
-                                ((Newspaper)m).getIssueDay(), "", ""});
-        continue;
       }
+      //   } else {
+      //     break;
+      //   }
     }
+    napDuLieu(list);
   }
 
   private void ptn_SearchActionPerformed(
