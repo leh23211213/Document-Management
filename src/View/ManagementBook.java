@@ -16,55 +16,55 @@ import javax.swing.table.DefaultTableModel;
 
 public class ManagementBook extends javax.swing.JFrame {
 
-  DefaultTableModel DA = new DefaultTableModel();
-  ArrayList<Model> list = new ArrayList<>();
+    DefaultTableModel DA = new DefaultTableModel();
+    ArrayList<Model> list = new ArrayList<>();
 
-  public ManagementBook() {
-    initComponents();
-    tbl_Table.setModel(DA);
-    String ext =
-        "E:\\IT\\VSCode\\Github\\Document-Management\\src\\getData.txt";
-    IDataAccess context = new FileAccess(ext);
-    ModelsController controller = new ModelsController(context);
-    this.list = controller.Repository.list();
-    DA.setColumnIdentifiers(new Object[] {
-        "Mã tài liệu", "Tác giả", "Tiêu đề", "Nhà xuất bản", "Số bản phát hành",
-        "Số phát hành", " Ngày phát hành", "Tháng phát hành", "Số trang"});
-    napDuLieu(list);
-    lb_Id.setVisible(false);
-    txt_Id.setVisible(false);
-    lb_Authors.setVisible(false);
-    txt_Authors.setVisible(false);
-    lb_Title.setVisible(false);
-    txt_Title.setVisible(false);
-    lb_Publisher.setVisible(false);
-    txt_Publisher.setVisible(false);
-    lb_PublishedQuantity.setVisible(false);
-    txt_PublishedQuantity.setVisible(false);
-    lb_IssueNumber.setVisible(false);
-    txt_IssueNumber.setVisible(false);
-    lb_IssueDay.setVisible(false);
-    txt_IssueDay.setVisible(false);
-    lb_IssueMonth.setVisible(false);
-    txt_IssueMonth.setVisible(false);
-    lb_NumberOfPages.setVisible(false);
-    txt_NumberOfPages.setVisible(false);
-    lb_FitlerTitler.setVisible(false);
-    txt_Filter.setVisible(false);
-    ptn_Filter.setVisible(false);
-    ptn_Search.setVisible(false);
-    txt_Search.setVisible(false);
-    lb_Search.setVisible(false);
-    ptn_Delete.setVisible(false);
-    txt_Delete.setVisible(false);
-    lb_Delete.setVisible(false);
-    ptn_InsertNext.setVisible(false);
-    lb_Insert.setVisible(false);
-    txt_Insert.setVisible(false);
-    ptn_Insert.setVisible(false);
-  }
+    public ManagementBook() {
+        initComponents();
+        tbl_Table.setModel(DA);
+        String ext
+                = "E:\\IT\\VSCode\\Github\\Document-Management\\src\\getData.txt";
+        IDataAccess context = new FileAccess(ext);
+        ModelsController controller = new ModelsController(context);
+        this.list = controller.Repository.list();
+        DA.setColumnIdentifiers(new Object[]{
+            "Mã tài liệu", "Tác giả", "Tiêu đề", "Nhà xuất bản", "Số bản phát hành",
+            "Số phát hành", " Ngày phát hành", "Tháng phát hành", "Số trang"});
+        napDuLieu(list);
+        lb_Id.setVisible(false);
+        txt_Id.setVisible(false);
+        lb_Authors.setVisible(false);
+        txt_Authors.setVisible(false);
+        lb_Title.setVisible(false);
+        txt_Title.setVisible(false);
+        lb_Publisher.setVisible(false);
+        txt_Publisher.setVisible(false);
+        lb_PublishedQuantity.setVisible(false);
+        txt_PublishedQuantity.setVisible(false);
+        lb_IssueNumber.setVisible(false);
+        txt_IssueNumber.setVisible(false);
+        lb_IssueDay.setVisible(false);
+        txt_IssueDay.setVisible(false);
+        lb_IssueMonth.setVisible(false);
+        txt_IssueMonth.setVisible(false);
+        lb_NumberOfPages.setVisible(false);
+        txt_NumberOfPages.setVisible(false);
+        lb_FitlerTitler.setVisible(false);
+        txt_Filter.setVisible(false);
+        ptn_Filter.setVisible(false);
+        ptn_Search.setVisible(false);
+        txt_Search.setVisible(false);
+        lb_Search.setVisible(false);
+        ptn_Delete.setVisible(false);
+        txt_Delete.setVisible(false);
+        lb_Delete.setVisible(false);
+        ptn_InsertNext.setVisible(false);
+        lb_Insert.setVisible(false);
+        txt_Insert.setVisible(false);
+        ptn_Insert.setVisible(false);
+    }
 
-  @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
 
   // Code">//GEN-BEGIN:initComponents
   private void initComponents() {
@@ -1073,621 +1073,610 @@ public class ManagementBook extends javax.swing.JFrame {
     pack();
   } // </editor-fold>//GEN-END:initComponents
 
-  private void txt_IssueNumberActionPerformed(
-      java.awt.event
-          .ActionEvent evt) { // GEN-FIRST:event_txt_IssueNumberActionPerformed
-    // TODO add your handling code here:
-  } // GEN-LAST:event_txt_IssueNumberActionPerformed
+    private void txt_IssueNumberActionPerformed(
+            java.awt.event.ActionEvent evt) { // GEN-FIRST:event_txt_IssueNumberActionPerformed
+        // TODO add your handling code here:
+    } // GEN-LAST:event_txt_IssueNumberActionPerformed
 
-  private void ptn_InsertActionPerformed(
-      java.awt.event
-          .ActionEvent evt) { // GEN-FIRST:event_ptn_InsertActionPerformed
-    String id = txt_Id.getText().replaceAll(" ", "");
-    int check = 0;
-    for (var m : list) {
-      if (m.getId().equals(id)) {
-        check++;
-      }
+    private void ptn_InsertActionPerformed(
+            java.awt.event.ActionEvent evt) { // GEN-FIRST:event_ptn_InsertActionPerformed
+        String id = txt_Id.getText().replaceAll(" ", "");
+        int check = 0;
+        for (var m : list) {
+            if (m.getId().equals(id)) {
+                check++;
+            }
+        }
+        if (check != 0) {
+            JOptionPane.showMessageDialog(null, "không được thêm trùng mã tài liệu");
+        } else {
+            String authors = txt_Authors.getText().replaceAll(" ", "");
+            String title = txt_Title.getText().replaceAll(" ", "");
+            String publisher = txt_Publisher.getText().replaceAll(" ", "");
+            int publishedQuantity = Integer.parseInt(txt_PublishedQuantity.getText());
+            if (id.charAt(0) == 'B') {
+                int numberOfPages = Integer.parseInt(txt_NumberOfPages.getText());
+                list.add(new Book(id, authors, title, publisher, publishedQuantity,
+                        numberOfPages));
+            } else if (id.charAt(0) == 'M') {
+                int issueNumber = Integer.parseInt(txt_IssueNumber.getText());
+                int issueMonth = Integer.parseInt(txt_IssueMonth.getText());
+
+                list.add(new Megazine(id, authors, title, publisher, publishedQuantity,
+                        issueNumber, issueMonth));
+            } else if (id.charAt(0) == 'N') {
+                int issueDay = Integer.parseInt(txt_IssueDay.getText());
+                list.add(new Newspaper(id, authors, title, publisher, publishedQuantity,
+                        issueDay));
+            } else {
+                JOptionPane.showMessageDialog(
+                        null, "Phải nhập mã tài liệu đúng quy chuẩn 'B--' 'M--' 'N--'!");
+            }
+        }
+        napDuLieu(list);
+    } // GEN-LAST:event_ptn_InsertActionPerformed
+
+    private void txt_InsertActionPerformed(
+            java.awt.event.ActionEvent evt) { // GEN-FIRST:event_txt_InsertActionPerformed
+        // TODO add your handling code here:
+    } // GEN-LAST:event_txt_InsertActionPerformed
+
+    private void ptn_InsertNextActionPerformed(
+            java.awt.event.ActionEvent evt) { // GEN-FIRST:event_ptn_InsertNextActionPerformed
+        String key1 = "sách";
+        String key2 = "tạpchí";
+        String key3 = "báo";
+        String text = txt_Insert.getText().replaceAll(" ", "");
+        if (text.equals(key1)) {
+            insertBook();
+        } else if (text.equals(key2)) {
+            insertMegazine();
+        } else if (text.equals(key3)) {
+            insertNewspaper();
+        } else {
+            JOptionPane.showMessageDialog(null, "Không tồn tại loại cần thêm");
+        }
+
+    } // GEN-LAST:event_ptn_InsertNextActionPerformed
+
+    private void insertBook() {
+        lb_Id.setVisible(true);
+        txt_Id.setVisible(true);
+        lb_Authors.setVisible(true);
+        txt_Authors.setVisible(true);
+        lb_Title.setVisible(true);
+        txt_Title.setVisible(true);
+        lb_Publisher.setVisible(true);
+        txt_Publisher.setVisible(true);
+        lb_PublishedQuantity.setVisible(true);
+        txt_PublishedQuantity.setVisible(true);
+        lb_IssueNumber.setVisible(true);
+        txt_IssueNumber.setVisible(true);
+        lb_NumberOfPages.setVisible(true);
+        txt_NumberOfPages.setVisible(true);
+        lb_IssueNumber.setVisible(false);
+        txt_IssueNumber.setVisible(false);
+        lb_IssueDay.setVisible(false);
+        txt_IssueDay.setVisible(false);
+        lb_IssueMonth.setVisible(false);
+        txt_IssueMonth.setVisible(false);
+        ptn_Insert.setVisible(true);
     }
-    if (check != 0) {
-      JOptionPane.showMessageDialog(null, "không được thêm trùng mã tài liệu");
-    } else {
-      String authors = txt_Authors.getText().replaceAll(" ", "");
-      String title = txt_Title.getText().replaceAll(" ", "");
-      String publisher = txt_Publisher.getText().replaceAll(" ", "");
-      int publishedQuantity = Integer.parseInt(txt_PublishedQuantity.getText());
-      if (id.charAt(0) == 'B') {
-        int numberOfPages = Integer.parseInt(txt_NumberOfPages.getText());
-        list.add(new Book(id, authors, title, publisher, publishedQuantity,
-                          numberOfPages));
-      } else if (id.charAt(0) == 'M') {
-        int issueNumber = Integer.parseInt(txt_IssueNumber.getText());
-        int issueMonth = Integer.parseInt(txt_IssueMonth.getText());
 
-        list.add(new Megazine(id, authors, title, publisher, publishedQuantity,
-                              issueNumber, issueMonth));
-      } else if (id.charAt(0) == 'N') {
-        int issueDay = Integer.parseInt(txt_IssueDay.getText());
-        list.add(new Newspaper(id, authors, title, publisher, publishedQuantity,
-                               issueDay));
-      } else {
-        JOptionPane.showMessageDialog(
-            null, "Phải nhập mã tài liệu đúng quy chuẩn 'B--' 'M--' 'N--'!");
-      }
-    }
-    napDuLieu(list);
-  } // GEN-LAST:event_ptn_InsertActionPerformed
-
-  private void txt_InsertActionPerformed(
-      java.awt.event
-          .ActionEvent evt) { // GEN-FIRST:event_txt_InsertActionPerformed
-    // TODO add your handling code here:
-  } // GEN-LAST:event_txt_InsertActionPerformed
-
-  private void ptn_InsertNextActionPerformed(
-      java.awt.event
-          .ActionEvent evt) { // GEN-FIRST:event_ptn_InsertNextActionPerformed
-    String key1 = "sách";
-    String key2 = "tạpchí";
-    String key3 = "báo";
-    String text = txt_Insert.getText().replaceAll(" ", "");
-    if (text.equals(key1)) {
-      insertBook();
-    } else if (text.equals(key2)) {
-      insertMegazine();
-    } else if (text.equals(key3)) {
-      insertNewspaper();
-    } else {
-      JOptionPane.showMessageDialog(null, "Không tồn tại loại cần thêm");
+    private void insertMegazine() {
+        lb_Id.setVisible(true);
+        txt_Id.setVisible(true);
+        lb_Authors.setVisible(true);
+        txt_Authors.setVisible(true);
+        lb_Title.setVisible(true);
+        txt_Title.setVisible(true);
+        lb_Publisher.setVisible(true);
+        txt_Publisher.setVisible(true);
+        lb_PublishedQuantity.setVisible(true);
+        txt_PublishedQuantity.setVisible(true);
+        lb_IssueNumber.setVisible(true);
+        txt_IssueNumber.setVisible(true);
+        lb_IssueNumber.setVisible(true);
+        txt_IssueNumber.setVisible(true);
+        lb_IssueMonth.setVisible(false);
+        txt_IssueMonth.setVisible(false);
+        lb_IssueDay.setVisible(false);
+        txt_IssueDay.setVisible(false);
+        lb_NumberOfPages.setVisible(false);
+        txt_NumberOfPages.setVisible(false);
+        ptn_Insert.setVisible(true);
     }
 
-  } // GEN-LAST:event_ptn_InsertNextActionPerformed
-
-  private void insertBook() {
-    lb_Id.setVisible(true);
-    txt_Id.setVisible(true);
-    lb_Authors.setVisible(true);
-    txt_Authors.setVisible(true);
-    lb_Title.setVisible(true);
-    txt_Title.setVisible(true);
-    lb_Publisher.setVisible(true);
-    txt_Publisher.setVisible(true);
-    lb_PublishedQuantity.setVisible(true);
-    txt_PublishedQuantity.setVisible(true);
-    lb_IssueNumber.setVisible(true);
-    txt_IssueNumber.setVisible(true);
-    lb_NumberOfPages.setVisible(true);
-    txt_NumberOfPages.setVisible(true);
-    lb_IssueNumber.setVisible(false);
-    txt_IssueNumber.setVisible(false);
-    lb_IssueDay.setVisible(false);
-    txt_IssueDay.setVisible(false);
-    lb_IssueMonth.setVisible(false);
-    txt_IssueMonth.setVisible(false);
-    ptn_Insert.setVisible(true);
-  }
-  private void insertMegazine() {
-    lb_Id.setVisible(true);
-    txt_Id.setVisible(true);
-    lb_Authors.setVisible(true);
-    txt_Authors.setVisible(true);
-    lb_Title.setVisible(true);
-    txt_Title.setVisible(true);
-    lb_Publisher.setVisible(true);
-    txt_Publisher.setVisible(true);
-    lb_PublishedQuantity.setVisible(true);
-    txt_PublishedQuantity.setVisible(true);
-    lb_IssueNumber.setVisible(true);
-    txt_IssueNumber.setVisible(true);
-    lb_IssueNumber.setVisible(true);
-    txt_IssueNumber.setVisible(true);
-    lb_IssueMonth.setVisible(false);
-    txt_IssueMonth.setVisible(false);
-    lb_IssueDay.setVisible(false);
-    txt_IssueDay.setVisible(false);
-    lb_NumberOfPages.setVisible(false);
-    txt_NumberOfPages.setVisible(false);
-    ptn_Insert.setVisible(true);
-  }
-  private void insertNewspaper() {
-    lb_Id.setVisible(true);
-    txt_Id.setVisible(true);
-    lb_Authors.setVisible(true);
-    txt_Authors.setVisible(true);
-    lb_Title.setVisible(true);
-    txt_Title.setVisible(true);
-    lb_Publisher.setVisible(true);
-    txt_Publisher.setVisible(true);
-    lb_PublishedQuantity.setVisible(true);
-    txt_PublishedQuantity.setVisible(true);
-    lb_IssueNumber.setVisible(true);
-    txt_IssueNumber.setVisible(true);
-    lb_IssueDay.setVisible(true);
-    txt_IssueDay.setVisible(true);
-    lb_IssueNumber.setVisible(false);
-    txt_IssueNumber.setVisible(false);
-    lb_IssueMonth.setVisible(false);
-    txt_IssueMonth.setVisible(false);
-    lb_NumberOfPages.setVisible(false);
-    txt_NumberOfPages.setVisible(false);
-    ptn_Insert.setVisible(true);
-  }
-
-  private void txt_DeleteActionPerformed(
-      java.awt.event
-          .ActionEvent evt) { // GEN-FIRST:event_txt_DeleteActionPerformed
-    // TODO add your handling code here:
-  } // GEN-LAST:event_txt_DeleteActionPerformed
-
-  private void ptn_DeleteActionPerformed(
-      java.awt.event
-          .ActionEvent evt) { // GEN-FIRST:event_ptn_DeleteActionPerformed
-    // TODO add your handling code here:
-    String key = txt_Delete.getText().replaceAll(" ", "");
-    Delete(key);
-  }
-  // GEN-LAST:event_ptn_DeleteActionPerformed
-  private void Delete(String key) {
-    for (var m : list) {
-      if (m.getId().equals(key)) {
-        list.remove(m);
-        break;
-      }
-      //   } else {
-      //     break;
-      //   }
+    private void insertNewspaper() {
+        lb_Id.setVisible(true);
+        txt_Id.setVisible(true);
+        lb_Authors.setVisible(true);
+        txt_Authors.setVisible(true);
+        lb_Title.setVisible(true);
+        txt_Title.setVisible(true);
+        lb_Publisher.setVisible(true);
+        txt_Publisher.setVisible(true);
+        lb_PublishedQuantity.setVisible(true);
+        txt_PublishedQuantity.setVisible(true);
+        lb_IssueNumber.setVisible(true);
+        txt_IssueNumber.setVisible(true);
+        lb_IssueDay.setVisible(true);
+        txt_IssueDay.setVisible(true);
+        lb_IssueNumber.setVisible(false);
+        txt_IssueNumber.setVisible(false);
+        lb_IssueMonth.setVisible(false);
+        txt_IssueMonth.setVisible(false);
+        lb_NumberOfPages.setVisible(false);
+        txt_NumberOfPages.setVisible(false);
+        ptn_Insert.setVisible(true);
     }
-    napDuLieu(list);
-  }
 
-  private void ptn_SearchActionPerformed(
-      java.awt.event
-          .ActionEvent evt) { // GEN-FIRST:event_ptn_SearchActionPerformed
-    // TODO add your handling code here:
-    String key = txt_Search.getText().replaceAll(" ", "");
-    searchData(key);
-  } // GEN-LAST:event_ptn_SearchActionPerformed
+    private void txt_DeleteActionPerformed(
+            java.awt.event.ActionEvent evt) { // GEN-FIRST:event_txt_DeleteActionPerformed
+        // TODO add your handling code here:
+    } // GEN-LAST:event_txt_DeleteActionPerformed
 
-  private void searchData(String key) {
-    while (DA.getRowCount() > 0) {
-      DA.removeRow(0);
+    private void ptn_DeleteActionPerformed(
+            java.awt.event.ActionEvent evt) { // GEN-FIRST:event_ptn_DeleteActionPerformed
+        // TODO add your handling code here:
+        String key = txt_Delete.getText().replaceAll(" ", "");
+        Delete(key);
     }
-    for (var m : list) {
-      if (m.getId().equals(key) && key.charAt(0) == 'B') {
-        DA.addRow(new Object[] {m.getId(), m.getAuthors(), m.getTitle(),
-                                m.getPublisher(), m.getPublishedQuantity(), "",
-                                "", "", ((Book)m).getNumOfPages()});
-        break;
-      } else if (m.getId().equals(key) && key.charAt(0) == 'M') {
-        DA.addRow(new Object[] {m.getId(), m.getAuthors(), m.getTitle(),
-                                m.getPublisher(), m.getPublishedQuantity(),
-                                ((Megazine)m).getIssueNumber(), "",
-                                ((Megazine)m).getIssueMonth(), ""});
-        break;
-      } else if (m.getId().equals(key) && key.charAt(0) == 'N') {
-        DA.addRow(new Object[] {m.getId(), m.getAuthors(), m.getTitle(),
-                                m.getPublisher(), m.getPublishedQuantity(), "",
-                                ((Newspaper)m).getIssueDay(), "", ""});
-        break;
-      }
+    // GEN-LAST:event_ptn_DeleteActionPerformed
+
+    private void Delete(String key) {
+        for (var m : list) {
+            if (m.getId().equals(key)) {
+                list.remove(m);
+                break;
+            }
+            //   } else {
+            //     break;
+            //   }
+        }
+        napDuLieu(list);
+        JOptionPane.showMessageDialog(null, "Đã Xóa");
     }
-    if (DA.getRowCount() == 0)
-      JOptionPane.showMessageDialog(null, "Không tìm thấy");
-  }
 
-  private void txt_SearchActionPerformed(
-      java.awt.event
-          .ActionEvent evt) { // GEN-FIRST:event_txt_SearchActionPerformed
-    // TODO add your handling code here:
-  } // GEN-LAST:event_txt_SearchActionPerformed
+    private void ptn_SearchActionPerformed(
+            java.awt.event.ActionEvent evt) { // GEN-FIRST:event_ptn_SearchActionPerformed
+        // TODO add your handling code here:
+        String key = txt_Search.getText().replaceAll(" ", "");
+        searchData(key);
 
-  private void ptn_FilterActionPerformed(
-      java.awt.event
-          .ActionEvent evt) { // GEN-FIRST:event_ptn_FilterActionPerformed
-    // TODO add your handling code here:
-    String key1 = "sách";
-    String key2 = "tạpchí";
-    String key3 = "báo";
-    String text = txt_Filter.getText().replaceAll(" ", "");
-    if (text.equals(key1)) {
-      napDuLieuSach(list);
-    } else if (text.equals(key2)) {
-      napDuLieuBao(list);
-    } else if (text.equals(key3)) {
-      napDuLieuTapChi(list);
-    } else {
-      JOptionPane.showMessageDialog(null, "Không tìm thấy");
+    } // GEN-LAST:event_ptn_SearchActionPerformed
+
+    private void searchData(String key) {
+        while (DA.getRowCount() > 0) {
+            DA.removeRow(0);
+        }
+        for (var m : list) {
+            if (m.getId().equals(key) && key.charAt(0) == 'B') {
+                DA.addRow(new Object[]{m.getId(), m.getAuthors(), m.getTitle(),
+                    m.getPublisher(), m.getPublishedQuantity(), "",
+                    "", "", ((Book) m).getNumOfPages()});
+                JOptionPane.showMessageDialog(null, "Đã Tìm Thấy");
+                break;
+            } else if (m.getId().equals(key) && key.charAt(0) == 'M') {
+                DA.addRow(new Object[]{m.getId(), m.getAuthors(), m.getTitle(),
+                    m.getPublisher(), m.getPublishedQuantity(),
+                    ((Megazine) m).getIssueNumber(), "",
+                    ((Megazine) m).getIssueMonth(), ""});
+                JOptionPane.showMessageDialog(null, "Đã Tìm Thấy");
+                break;
+            } else if (m.getId().equals(key) && key.charAt(0) == 'N') {
+                DA.addRow(new Object[]{m.getId(), m.getAuthors(), m.getTitle(),
+                    m.getPublisher(), m.getPublishedQuantity(), "",
+                    ((Newspaper) m).getIssueDay(), "", ""});
+                JOptionPane.showMessageDialog(null, "Đã Tìm Thấy");
+                break;
+            }
+        }
+        if (DA.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Không tìm thấy");
+            napDuLieu(list);
+        }
     }
-  } // GEN-LAST:event_ptn_FilterActionPerformed
 
-  private void txt_FilterActionPerformed(
-      java.awt.event
-          .ActionEvent evt) { // GEN-FIRST:event_txt_FilterActionPerformed
-    // TODO add your handling code here:
-  } // GEN-LAST:event_txt_FilterActionPerformed
+    private void txt_SearchActionPerformed(
+            java.awt.event.ActionEvent evt) { // GEN-FIRST:event_txt_SearchActionPerformed
+        // TODO add your handling code here:
+    } // GEN-LAST:event_txt_SearchActionPerformed
 
-  private void ptn_ReSetActionPerformed(
-      java.awt.event
-          .ActionEvent evt) { // GEN-FIRST:event_ptn_ReSetActionPerformed
-    // TODO add your handling code here:
-    tbl_Table.setModel(DA);
-    String ext =
-        "E:\\IT\\VSCode\\Github\\Document-Management\\src\\getData.txt";
-    IDataAccess context = new FileAccess(ext);
-    ModelsController controller = new ModelsController(context);
-    list = controller.Repository.list();
-    DA.setColumnIdentifiers(new Object[] {
-        "Mã tài liệu", "Tác giả", "Tiêu đề", "Nhà xuất bản", "Số bản phát hành",
-        "Số phát hành", " Ngày phát hành", "Tháng phát hành", "Số trang"});
-    napDuLieu(list);
-    lb_Id.setVisible(false);
-    txt_Id.setVisible(false);
-    lb_Authors.setVisible(false);
-    txt_Authors.setVisible(false);
-    lb_Title.setVisible(false);
-    txt_Title.setVisible(false);
-    lb_Publisher.setVisible(false);
-    txt_Publisher.setVisible(false);
-    lb_PublishedQuantity.setVisible(false);
-    txt_PublishedQuantity.setVisible(false);
-    lb_IssueNumber.setVisible(false);
-    txt_IssueNumber.setVisible(false);
-    lb_IssueDay.setVisible(false);
-    txt_IssueDay.setVisible(false);
-    lb_IssueMonth.setVisible(false);
-    txt_IssueMonth.setVisible(false);
-    lb_NumberOfPages.setVisible(false);
-    txt_NumberOfPages.setVisible(false);
-    lb_FitlerTitler.setVisible(false);
-    txt_Filter.setVisible(false);
-    ptn_Filter.setVisible(false);
-    ptn_Search.setVisible(false);
-    txt_Search.setVisible(false);
-    lb_Search.setVisible(false);
-    ptn_Delete.setVisible(false);
-    txt_Delete.setVisible(false);
-    lb_Delete.setVisible(false);
-    ptn_InsertNext.setVisible(false);
-    lb_Insert.setVisible(false);
-    txt_Insert.setVisible(false);
-    ptn_Insert.setVisible(false);
-  } // GEN-LAST:event_ptn_ReSetActionPerformed
+    private void ptn_FilterActionPerformed(
+            java.awt.event.ActionEvent evt) { // GEN-FIRST:event_ptn_FilterActionPerformed
+        // TODO add your handling code here:
+        String key1 = "sách";
+        String key2 = "tạpchí";
+        String key3 = "báo";
+        String text = txt_Filter.getText().replaceAll(" ", "");
+        if (text.equals(key1)) {
+            napDuLieuSach(list);
+            JOptionPane.showMessageDialog(null, "Lọc thành công");
+        } else if (text.equals(key2)) {
+            napDuLieuBao(list);
+            JOptionPane.showMessageDialog(null, "Lọc thành công");
+        } else if (text.equals(key3)) {
+            napDuLieuTapChi(list);
+            JOptionPane.showMessageDialog(null, "Lọc thành công");
+        } else {
+            JOptionPane.showMessageDialog(null, "Không tìm thấy");
+        }
+    } // GEN-LAST:event_ptn_FilterActionPerformed
 
-  private void jTextField1ActionPerformed(
-      java.awt.event
-          .ActionEvent evt) { // GEN-FIRST:event_jTextField1ActionPerformed
-    // TODO add your handling code here:
-  } // GEN-LAST:event_jTextField1ActionPerformed
+    private void txt_FilterActionPerformed(
+            java.awt.event.ActionEvent evt) { // GEN-FIRST:event_txt_FilterActionPerformed
+        // TODO add your handling code here:
+    } // GEN-LAST:event_txt_FilterActionPerformed
 
-  private void txt_PublishedQuantityActionPerformed(
-      java.awt.event.ActionEvent
-          evt) { // GEN-FIRST:event_txt_PublishedQuantityActionPerformed
-    // TODO add your handling code here:
-  } // GEN-LAST:event_txt_PublishedQuantityActionPerformed
+    private void ptn_ReSetActionPerformed(
+            java.awt.event.ActionEvent evt) { // GEN-FIRST:event_ptn_ReSetActionPerformed
+        // TODO add your handling code here:
+        tbl_Table.setModel(DA);
+        String ext
+                = "E:\\IT\\VSCode\\Github\\Document-Management\\src\\getData.txt";
+        IDataAccess context = new FileAccess(ext);
+        ModelsController controller = new ModelsController(context);
+        list = controller.Repository.list();
+        DA.setColumnIdentifiers(new Object[]{
+            "Mã tài liệu", "Tác giả", "Tiêu đề", "Nhà xuất bản", "Số bản phát hành",
+            "Số phát hành", " Ngày phát hành", "Tháng phát hành", "Số trang"});
+        napDuLieu(list);
+        lb_Id.setVisible(false);
+        txt_Id.setVisible(false);
+        lb_Authors.setVisible(false);
+        txt_Authors.setVisible(false);
+        lb_Title.setVisible(false);
+        txt_Title.setVisible(false);
+        lb_Publisher.setVisible(false);
+        txt_Publisher.setVisible(false);
+        lb_PublishedQuantity.setVisible(false);
+        txt_PublishedQuantity.setVisible(false);
+        lb_IssueNumber.setVisible(false);
+        txt_IssueNumber.setVisible(false);
+        lb_IssueDay.setVisible(false);
+        txt_IssueDay.setVisible(false);
+        lb_IssueMonth.setVisible(false);
+        txt_IssueMonth.setVisible(false);
+        lb_NumberOfPages.setVisible(false);
+        txt_NumberOfPages.setVisible(false);
+        lb_FitlerTitler.setVisible(false);
+        txt_Filter.setVisible(false);
+        ptn_Filter.setVisible(false);
+        ptn_Search.setVisible(false);
+        txt_Search.setVisible(false);
+        lb_Search.setVisible(false);
+        ptn_Delete.setVisible(false);
+        txt_Delete.setVisible(false);
+        lb_Delete.setVisible(false);
+        ptn_InsertNext.setVisible(false);
+        lb_Insert.setVisible(false);
+        txt_Insert.setVisible(false);
+        ptn_Insert.setVisible(false);
+    } // GEN-LAST:event_ptn_ReSetActionPerformed
 
-  private void txt_IssueDayActionPerformed(
-      java.awt.event
-          .ActionEvent evt) { // GEN-FIRST:event_txt_IssueDayActionPerformed
-    // TODO add your handling code here:
-  } // GEN-LAST:event_txt_IssueDayActionPerformed
+    private void jTextField1ActionPerformed(
+            java.awt.event.ActionEvent evt) { // GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    } // GEN-LAST:event_jTextField1ActionPerformed
 
-  private void txt_TitleActionPerformed(
-      java.awt.event
-          .ActionEvent evt) { // GEN-FIRST:event_txt_TitleActionPerformed
-    // TODO add your handling code here:
-  } // GEN-LAST:event_txt_TitleActionPerformed
+    private void txt_PublishedQuantityActionPerformed(
+            java.awt.event.ActionEvent evt) { // GEN-FIRST:event_txt_PublishedQuantityActionPerformed
+        // TODO add your handling code here:
+    } // GEN-LAST:event_txt_PublishedQuantityActionPerformed
 
-  private void txt_PublisherActionPerformed(
-      java.awt.event
-          .ActionEvent evt) { // GEN-FIRST:event_txt_PublisherActionPerformed
-    // TODO add your handling code here:
-  } // GEN-LAST:event_txt_PublisherActionPerformed
+    private void txt_IssueDayActionPerformed(
+            java.awt.event.ActionEvent evt) { // GEN-FIRST:event_txt_IssueDayActionPerformed
+        // TODO add your handling code here:
+    } // GEN-LAST:event_txt_IssueDayActionPerformed
 
-  private void txt_NumberOfPagesActionPerformed(
-      java.awt.event.ActionEvent
-          evt) { // GEN-FIRST:event_txt_NumberOfPagesActionPerformed
-    // TODO add your handling code here:
-  } // GEN-LAST:event_txt_NumberOfPagesActionPerformed
+    private void txt_TitleActionPerformed(
+            java.awt.event.ActionEvent evt) { // GEN-FIRST:event_txt_TitleActionPerformed
+        // TODO add your handling code here:
+    } // GEN-LAST:event_txt_TitleActionPerformed
 
-  private void txt_IssueMonthActionPerformed(
-      java.awt.event
-          .ActionEvent evt) { // GEN-FIRST:event_txt_IssueMonthActionPerformed
-    // TODO add your handling code here:
-  } // GEN-LAST:event_txt_IssueMonthActionPerformed
+    private void txt_PublisherActionPerformed(
+            java.awt.event.ActionEvent evt) { // GEN-FIRST:event_txt_PublisherActionPerformed
+        // TODO add your handling code here:
+    } // GEN-LAST:event_txt_PublisherActionPerformed
 
-  private void txt_IdActionPerformed(
-      java.awt.event.ActionEvent evt) { // GEN-FIRST:event_txt_IdActionPerformed
-    // TODO add your handling code here:
-  } // GEN-LAST:event_txt_IdActionPerformed
+    private void txt_NumberOfPagesActionPerformed(
+            java.awt.event.ActionEvent evt) { // GEN-FIRST:event_txt_NumberOfPagesActionPerformed
+        // TODO add your handling code here:
+    } // GEN-LAST:event_txt_NumberOfPagesActionPerformed
 
-  private void txt_AuthorsActionPerformed(
-      java.awt.event
-          .ActionEvent evt) { // GEN-FIRST:event_txt_AuthorsActionPerformed
-    // TODO add your handling code here:
-  } // GEN-LAST:event_txt_AuthorsActionPerformed
+    private void txt_IssueMonthActionPerformed(
+            java.awt.event.ActionEvent evt) { // GEN-FIRST:event_txt_IssueMonthActionPerformed
+        // TODO add your handling code here:
+    } // GEN-LAST:event_txt_IssueMonthActionPerformed
 
-  private void jTextField2ActionPerformed(
-      java.awt.event
-          .ActionEvent evt) { // GEN-FIRST:event_jTextField2ActionPerformed
-    // TODO add your handling code here:
-  } // GEN-LAST:event_jTextField2ActionPerformed
+    private void txt_IdActionPerformed(
+            java.awt.event.ActionEvent evt) { // GEN-FIRST:event_txt_IdActionPerformed
+        // TODO add your handling code here:
+    } // GEN-LAST:event_txt_IdActionPerformed
 
-  public void napDuLieu(ArrayList<Model> list) {
-    while (DA.getRowCount() > 0) {
-      DA.removeRow(0);
+    private void txt_AuthorsActionPerformed(
+            java.awt.event.ActionEvent evt) { // GEN-FIRST:event_txt_AuthorsActionPerformed
+        // TODO add your handling code here:
+    } // GEN-LAST:event_txt_AuthorsActionPerformed
+
+    private void jTextField2ActionPerformed(
+            java.awt.event.ActionEvent evt) { // GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    } // GEN-LAST:event_jTextField2ActionPerformed
+
+    public void napDuLieu(ArrayList<Model> list) {
+        while (DA.getRowCount() > 0) {
+            DA.removeRow(0);
+        }
+        for (var m : list) {
+            if (m instanceof Book) {
+
+                DA.addRow(new Object[]{m.getId(), m.getAuthors(), m.getTitle(),
+                    m.getPublisher(), m.getPublishedQuantity(), "",
+                    "", "", ((Book) m).getNumOfPages()});
+
+            } else if (m instanceof Megazine) {
+
+                DA.addRow(new Object[]{m.getId(), m.getAuthors(), m.getTitle(),
+                    m.getPublisher(), m.getPublishedQuantity(),
+                    ((Megazine) m).getIssueNumber(), "",
+                    ((Megazine) m).getIssueMonth(), ""});
+
+            } else if (m instanceof Newspaper) {
+
+                DA.addRow(new Object[]{m.getId(), m.getAuthors(), m.getTitle(),
+                    m.getPublisher(), m.getPublishedQuantity(), "",
+                    ((Newspaper) m).getIssueDay(), "", ""});
+            }
+        }
     }
-    for (var m : list) {
-      if (m instanceof Book) {
 
-        DA.addRow(new Object[] {m.getId(), m.getAuthors(), m.getTitle(),
-                                m.getPublisher(), m.getPublishedQuantity(), "",
-                                "", "", ((Book)m).getNumOfPages()});
+    private void rdo_FilterActionPerformed(
+            java.awt.event.ActionEvent evt) { // GEN-FIRST:event_rdo_FilterActionPerformed
+        // TODO add your handling code here:
+        lb_Id.setVisible(false);
+        txt_Id.setVisible(false);
+        lb_Authors.setVisible(false);
+        txt_Authors.setVisible(false);
+        lb_Title.setVisible(false);
+        txt_Title.setVisible(false);
+        lb_Publisher.setVisible(false);
+        txt_Publisher.setVisible(false);
+        lb_PublishedQuantity.setVisible(false);
+        txt_PublishedQuantity.setVisible(false);
+        lb_IssueNumber.setVisible(false);
+        txt_IssueNumber.setVisible(false);
+        lb_IssueDay.setVisible(false);
+        txt_IssueDay.setVisible(false);
+        lb_IssueMonth.setVisible(false);
+        txt_IssueMonth.setVisible(false);
+        lb_NumberOfPages.setVisible(false);
+        txt_NumberOfPages.setVisible(false);
+        lb_FitlerTitler.setVisible(true);
+        txt_Filter.setVisible(true);
+        ptn_Filter.setVisible(true);
+        ptn_Search.setVisible(false);
+        txt_Search.setVisible(false);
+        lb_Search.setVisible(false);
+        ptn_Delete.setVisible(false);
+        txt_Delete.setVisible(false);
+        lb_Delete.setVisible(false);
+        ptn_InsertNext.setVisible(false);
+        lb_Insert.setVisible(false);
+        txt_Insert.setVisible(false);
+        ptn_Insert.setVisible(false);
+    } // GEN-LAST:event_rdo_FilterActionPerformed
 
-      } else if (m instanceof Megazine) {
+    private void rdo_InsertActionPerformed(
+            java.awt.event.ActionEvent evt) { // GEN-FIRST:event_rdo_InsertActionPerformed
+        // TODO add your handling code here:
+        lb_Id.setVisible(false);
+        txt_Id.setVisible(false);
+        lb_Authors.setVisible(false);
+        txt_Authors.setVisible(false);
+        lb_Title.setVisible(false);
+        txt_Title.setVisible(false);
+        lb_Publisher.setVisible(false);
+        txt_Publisher.setVisible(false);
+        lb_PublishedQuantity.setVisible(false);
+        txt_PublishedQuantity.setVisible(false);
+        lb_IssueNumber.setVisible(false);
+        txt_IssueNumber.setVisible(false);
+        lb_IssueDay.setVisible(false);
+        txt_IssueDay.setVisible(false);
+        lb_IssueMonth.setVisible(false);
+        txt_IssueMonth.setVisible(false);
+        lb_NumberOfPages.setVisible(false);
+        txt_NumberOfPages.setVisible(false);
+        lb_FitlerTitler.setVisible(false);
+        txt_Filter.setVisible(false);
+        ptn_Filter.setVisible(false);
+        ptn_Search.setVisible(false);
+        txt_Search.setVisible(false);
+        lb_Search.setVisible(false);
+        ptn_Delete.setVisible(false);
+        txt_Delete.setVisible(false);
+        lb_Delete.setVisible(false);
+        ptn_InsertNext.setVisible(true);
+        lb_Insert.setVisible(true);
+        txt_Insert.setVisible(true);
+        ptn_Insert.setVisible(false);
+    } // GEN-LAST:event_rdo_InsertActionPerformed
 
-        DA.addRow(new Object[] {m.getId(), m.getAuthors(), m.getTitle(),
-                                m.getPublisher(), m.getPublishedQuantity(),
-                                ((Megazine)m).getIssueNumber(), "",
-                                ((Megazine)m).getIssueMonth(), ""});
+    private void rdo_DeleteActionPerformed(
+            java.awt.event.ActionEvent evt) { // GEN-FIRST:event_rdo_DeleteActionPerformed
+        // TODO add your handling code here:
+        lb_Id.setVisible(false);
+        txt_Id.setVisible(false);
+        lb_Authors.setVisible(false);
+        txt_Authors.setVisible(false);
+        lb_Title.setVisible(false);
+        txt_Title.setVisible(false);
+        lb_Publisher.setVisible(false);
+        txt_Publisher.setVisible(false);
+        lb_PublishedQuantity.setVisible(false);
+        txt_PublishedQuantity.setVisible(false);
+        lb_IssueNumber.setVisible(false);
+        txt_IssueNumber.setVisible(false);
+        lb_IssueDay.setVisible(false);
+        txt_IssueDay.setVisible(false);
+        lb_IssueMonth.setVisible(false);
+        txt_IssueMonth.setVisible(false);
+        lb_NumberOfPages.setVisible(false);
+        txt_NumberOfPages.setVisible(false);
+        lb_FitlerTitler.setVisible(false);
+        txt_Filter.setVisible(false);
+        ptn_Filter.setVisible(false);
+        ptn_Search.setVisible(false);
+        txt_Search.setVisible(false);
+        lb_Search.setVisible(false);
+        ptn_Delete.setVisible(true);
+        txt_Delete.setVisible(true);
+        lb_Delete.setVisible(true);
+        ptn_InsertNext.setVisible(false);
+        lb_Insert.setVisible(false);
+        txt_Insert.setVisible(false);
+        ptn_Insert.setVisible(false);
+    } // GEN-LAST:event_rdo_DeleteActionPerformed
 
-      } else if (m instanceof Newspaper) {
+    private void rdo_SearchActionPerformed(
+            java.awt.event.ActionEvent evt) { // GEN-FIRST:event_rdo_SearchActionPerformed
+        // TODO add your handling code here:
+        lb_Id.setVisible(false);
+        txt_Id.setVisible(false);
+        lb_Authors.setVisible(false);
+        txt_Authors.setVisible(false);
+        lb_Title.setVisible(false);
+        txt_Title.setVisible(false);
+        lb_Publisher.setVisible(false);
+        txt_Publisher.setVisible(false);
+        lb_PublishedQuantity.setVisible(false);
+        txt_PublishedQuantity.setVisible(false);
+        lb_IssueNumber.setVisible(false);
+        txt_IssueNumber.setVisible(false);
+        lb_IssueDay.setVisible(false);
+        txt_IssueDay.setVisible(false);
+        lb_IssueMonth.setVisible(false);
+        txt_IssueMonth.setVisible(false);
+        lb_NumberOfPages.setVisible(false);
+        txt_NumberOfPages.setVisible(false);
+        lb_FitlerTitler.setVisible(false);
+        txt_Filter.setVisible(false);
+        ptn_Filter.setVisible(false);
+        ptn_Search.setVisible(true);
+        txt_Search.setVisible(true);
+        lb_Search.setVisible(true);
+        ptn_Delete.setVisible(false);
+        txt_Delete.setVisible(false);
+        lb_Delete.setVisible(false);
+        ptn_InsertNext.setVisible(false);
+        lb_Insert.setVisible(false);
+        txt_Insert.setVisible(false);
+        ptn_Insert.setVisible(false);
+    } // GEN-LAST:event_rdo_SearchActionPerformed
 
-        DA.addRow(new Object[] {m.getId(), m.getAuthors(), m.getTitle(),
-                                m.getPublisher(), m.getPublishedQuantity(), "",
-                                ((Newspaper)m).getIssueDay(), "", ""});
-      }
+    public void napDuLieuSach(ArrayList<Model> list) {
+        while (DA.getRowCount() > 0) {
+            DA.removeRow(0);
+        }
+        for (var m : list) {
+            if (m instanceof Book) {
+                DA.addRow(new Object[]{m.getId(), m.getAuthors(), m.getTitle(),
+                    m.getPublisher(), m.getPublishedQuantity(), "",
+                    "", "", ((Book) m).getNumOfPages()});
+            }
+        }
     }
-  }
 
-  private void rdo_FilterActionPerformed(
-      java.awt.event
-          .ActionEvent evt) { // GEN-FIRST:event_rdo_FilterActionPerformed
-    // TODO add your handling code here:
-    lb_Id.setVisible(false);
-    txt_Id.setVisible(false);
-    lb_Authors.setVisible(false);
-    txt_Authors.setVisible(false);
-    lb_Title.setVisible(false);
-    txt_Title.setVisible(false);
-    lb_Publisher.setVisible(false);
-    txt_Publisher.setVisible(false);
-    lb_PublishedQuantity.setVisible(false);
-    txt_PublishedQuantity.setVisible(false);
-    lb_IssueNumber.setVisible(false);
-    txt_IssueNumber.setVisible(false);
-    lb_IssueDay.setVisible(false);
-    txt_IssueDay.setVisible(false);
-    lb_IssueMonth.setVisible(false);
-    txt_IssueMonth.setVisible(false);
-    lb_NumberOfPages.setVisible(false);
-    txt_NumberOfPages.setVisible(false);
-    lb_FitlerTitler.setVisible(true);
-    txt_Filter.setVisible(true);
-    ptn_Filter.setVisible(true);
-    ptn_Search.setVisible(false);
-    txt_Search.setVisible(false);
-    lb_Search.setVisible(false);
-    ptn_Delete.setVisible(false);
-    txt_Delete.setVisible(false);
-    lb_Delete.setVisible(false);
-    ptn_InsertNext.setVisible(false);
-    lb_Insert.setVisible(false);
-    txt_Insert.setVisible(false);
-    ptn_Insert.setVisible(false);
-  } // GEN-LAST:event_rdo_FilterActionPerformed
-
-  private void rdo_InsertActionPerformed(
-      java.awt.event
-          .ActionEvent evt) { // GEN-FIRST:event_rdo_InsertActionPerformed
-    // TODO add your handling code here:
-    lb_Id.setVisible(false);
-    txt_Id.setVisible(false);
-    lb_Authors.setVisible(false);
-    txt_Authors.setVisible(false);
-    lb_Title.setVisible(false);
-    txt_Title.setVisible(false);
-    lb_Publisher.setVisible(false);
-    txt_Publisher.setVisible(false);
-    lb_PublishedQuantity.setVisible(false);
-    txt_PublishedQuantity.setVisible(false);
-    lb_IssueNumber.setVisible(false);
-    txt_IssueNumber.setVisible(false);
-    lb_IssueDay.setVisible(false);
-    txt_IssueDay.setVisible(false);
-    lb_IssueMonth.setVisible(false);
-    txt_IssueMonth.setVisible(false);
-    lb_NumberOfPages.setVisible(false);
-    txt_NumberOfPages.setVisible(false);
-    lb_FitlerTitler.setVisible(false);
-    txt_Filter.setVisible(false);
-    ptn_Filter.setVisible(false);
-    ptn_Search.setVisible(false);
-    txt_Search.setVisible(false);
-    lb_Search.setVisible(false);
-    ptn_Delete.setVisible(false);
-    txt_Delete.setVisible(false);
-    lb_Delete.setVisible(false);
-    ptn_InsertNext.setVisible(true);
-    lb_Insert.setVisible(true);
-    txt_Insert.setVisible(true);
-    ptn_Insert.setVisible(false);
-  } // GEN-LAST:event_rdo_InsertActionPerformed
-
-  private void rdo_DeleteActionPerformed(
-      java.awt.event
-          .ActionEvent evt) { // GEN-FIRST:event_rdo_DeleteActionPerformed
-    // TODO add your handling code here:
-    lb_Id.setVisible(false);
-    txt_Id.setVisible(false);
-    lb_Authors.setVisible(false);
-    txt_Authors.setVisible(false);
-    lb_Title.setVisible(false);
-    txt_Title.setVisible(false);
-    lb_Publisher.setVisible(false);
-    txt_Publisher.setVisible(false);
-    lb_PublishedQuantity.setVisible(false);
-    txt_PublishedQuantity.setVisible(false);
-    lb_IssueNumber.setVisible(false);
-    txt_IssueNumber.setVisible(false);
-    lb_IssueDay.setVisible(false);
-    txt_IssueDay.setVisible(false);
-    lb_IssueMonth.setVisible(false);
-    txt_IssueMonth.setVisible(false);
-    lb_NumberOfPages.setVisible(false);
-    txt_NumberOfPages.setVisible(false);
-    lb_FitlerTitler.setVisible(false);
-    txt_Filter.setVisible(false);
-    ptn_Filter.setVisible(false);
-    ptn_Search.setVisible(false);
-    txt_Search.setVisible(false);
-    lb_Search.setVisible(false);
-    ptn_Delete.setVisible(true);
-    txt_Delete.setVisible(true);
-    lb_Delete.setVisible(true);
-    ptn_InsertNext.setVisible(false);
-    lb_Insert.setVisible(false);
-    txt_Insert.setVisible(false);
-    ptn_Insert.setVisible(false);
-  } // GEN-LAST:event_rdo_DeleteActionPerformed
-
-  private void rdo_SearchActionPerformed(
-      java.awt.event
-          .ActionEvent evt) { // GEN-FIRST:event_rdo_SearchActionPerformed
-    // TODO add your handling code here:
-    lb_Id.setVisible(false);
-    txt_Id.setVisible(false);
-    lb_Authors.setVisible(false);
-    txt_Authors.setVisible(false);
-    lb_Title.setVisible(false);
-    txt_Title.setVisible(false);
-    lb_Publisher.setVisible(false);
-    txt_Publisher.setVisible(false);
-    lb_PublishedQuantity.setVisible(false);
-    txt_PublishedQuantity.setVisible(false);
-    lb_IssueNumber.setVisible(false);
-    txt_IssueNumber.setVisible(false);
-    lb_IssueDay.setVisible(false);
-    txt_IssueDay.setVisible(false);
-    lb_IssueMonth.setVisible(false);
-    txt_IssueMonth.setVisible(false);
-    lb_NumberOfPages.setVisible(false);
-    txt_NumberOfPages.setVisible(false);
-    lb_FitlerTitler.setVisible(false);
-    txt_Filter.setVisible(false);
-    ptn_Filter.setVisible(false);
-    ptn_Search.setVisible(true);
-    txt_Search.setVisible(true);
-    lb_Search.setVisible(true);
-    ptn_Delete.setVisible(false);
-    txt_Delete.setVisible(false);
-    lb_Delete.setVisible(false);
-    ptn_InsertNext.setVisible(false);
-    lb_Insert.setVisible(false);
-    txt_Insert.setVisible(false);
-    ptn_Insert.setVisible(false);
-  } // GEN-LAST:event_rdo_SearchActionPerformed
-
-  public void napDuLieuSach(ArrayList<Model> list) {
-    while (DA.getRowCount() > 0) {
-      DA.removeRow(0);
+    public void napDuLieuBao(ArrayList<Model> list) {
+        while (DA.getRowCount() > 0) {
+            DA.removeRow(0);
+        }
+        for (var m : list) {
+            if (m instanceof Newspaper) {
+                DA.addRow(new Object[]{m.getId(), m.getAuthors(), m.getTitle(),
+                    m.getPublisher(), m.getPublishedQuantity(), "",
+                    ((Newspaper) m).getIssueDay(), "", ""});
+            }
+        }
     }
-    for (var m : list) {
-      if (m instanceof Book) {
-        DA.addRow(new Object[] {m.getId(), m.getAuthors(), m.getTitle(),
-                                m.getPublisher(), m.getPublishedQuantity(), "",
-                                "", "", ((Book)m).getNumOfPages()});
-      }
-    }
-  }
-  public void napDuLieuBao(ArrayList<Model> list) {
-    while (DA.getRowCount() > 0) {
-      DA.removeRow(0);
-    }
-    for (var m : list) {
-      if (m instanceof Newspaper) {
-        DA.addRow(new Object[] {m.getId(), m.getAuthors(), m.getTitle(),
-                                m.getPublisher(), m.getPublishedQuantity(), "",
-                                ((Newspaper)m).getIssueDay(), "", ""});
-      }
-    }
-  }
-  public void napDuLieuTapChi(ArrayList<Model> list) {
-    while (DA.getRowCount() > 0) {
-      DA.removeRow(0);
-    }
-    for (var m : list) {
-      if (m instanceof Megazine) {
-        DA.addRow(new Object[] {m.getId(), m.getAuthors(), m.getTitle(),
-                                m.getPublisher(), m.getPublishedQuantity(),
-                                ((Megazine)m).getIssueNumber(), "",
-                                ((Megazine)m).getIssueMonth(), ""});
-      }
-    }
-  }
 
-  private void
-  ptn_ExitActionPerformed(java.awt.event.ActionEvent
-                              evt) { // GEN-FIRST:event_ptn_ExitActionPerformed
-    System.exit(0);
-  } // GEN-LAST:event_ptn_ExitActionPerformed
+    public void napDuLieuTapChi(ArrayList<Model> list) {
+        while (DA.getRowCount() > 0) {
+            DA.removeRow(0);
+        }
+        for (var m : list) {
+            if (m instanceof Megazine) {
+                DA.addRow(new Object[]{m.getId(), m.getAuthors(), m.getTitle(),
+                    m.getPublisher(), m.getPublishedQuantity(),
+                    ((Megazine) m).getIssueNumber(), "",
+                    ((Megazine) m).getIssueMonth(), ""});
+            }
+        }
+    }
 
-  private void
-  jButton1ActionPerformed(java.awt.event.ActionEvent
-                              evt) { // GEN-FIRST:event_jButton1ActionPerformed
-                                     // TODO add your handling code here:
-  }                                  // GEN-LAST:event_jButton1ActionPerformed
+    private void
+            ptn_ExitActionPerformed(java.awt.event.ActionEvent evt) { // GEN-FIRST:event_ptn_ExitActionPerformed
+        System.exit(0);
+    } // GEN-LAST:event_ptn_ExitActionPerformed
 
-  private void
-  jButton2ActionPerformed(java.awt.event.ActionEvent
-                              evt) { // GEN-FIRST:event_jButton2ActionPerformed
-                                     // TODO add your handling code here:
-  }                                  // GEN-LAST:event_jButton2ActionPerformed
+    private void
+            jButton1ActionPerformed(java.awt.event.ActionEvent evt) { // GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }                                  // GEN-LAST:event_jButton1ActionPerformed
 
-  private void
-  jButton5ActionPerformed(java.awt.event.ActionEvent
-                              evt) { // GEN-FIRST:event_jButton5ActionPerformed
-                                     // TODO add your handling code here:
-  }                                  // GEN-LAST:event_jButton5ActionPerformed
+    private void
+            jButton2ActionPerformed(java.awt.event.ActionEvent evt) { // GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }                                  // GEN-LAST:event_jButton2ActionPerformed
 
-  /**
-   * @param args the command line arguments
-   */
-  public static void main(String args[]) {
-    /* Set the Nimbus look and feel */
-    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting
-    // code (optional) ">
-    /* If Nimbus (introduced in Java SE 6) is not available, stay with the
+    private void
+            jButton5ActionPerformed(java.awt.event.ActionEvent evt) { // GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }                                  // GEN-LAST:event_jButton5ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting
+        // code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the
      * default look and feel. For details see
      * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-     */
-    try {
-      for (javax.swing.UIManager.LookAndFeelInfo info :
-           javax.swing.UIManager.getInstalledLookAndFeels()) {
-        if ("Nimbus".equals(info.getName())) {
-          javax.swing.UIManager.setLookAndFeel(info.getClassName());
-          break;
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info
+                    : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(ManagementBook.class.getName())
+                    .log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(ManagementBook.class.getName())
+                    .log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(ManagementBook.class.getName())
+                    .log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(ManagementBook.class.getName())
+                    .log(java.util.logging.Level.SEVERE, null, ex);
         }
-      }
-    } catch (ClassNotFoundException ex) {
-      java.util.logging.Logger.getLogger(ManagementBook.class.getName())
-          .log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (InstantiationException ex) {
-      java.util.logging.Logger.getLogger(ManagementBook.class.getName())
-          .log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (IllegalAccessException ex) {
-      java.util.logging.Logger.getLogger(ManagementBook.class.getName())
-          .log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-      java.util.logging.Logger.getLogger(ManagementBook.class.getName())
-          .log(java.util.logging.Level.SEVERE, null, ex);
-    }
-    //</editor-fold>
+        //</editor-fold>
 
-    /* Create and display the form */
-    java.awt.EventQueue.invokeLater(new Runnable() {
-      public void run() { new ManagementBook().setVisible(true); }
-    });
-  }
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ManagementBook().setVisible(true);
+            }
+        });
+    }
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.ButtonGroup buttonGroup1;
