@@ -2,5 +2,5 @@
 
 ## Screenshots
 
-![App Screenshot]("E:\IT\VSCode\Github\README\Document-Management\Untitled.png")
+![App Screenshot]("E:\IT\VSCode\Github\Document-Management\Screenshots\Untitled.png")
 
